@@ -1,22 +1,26 @@
-extends KinematicBody2D
+extends "objectbase.gd"
 
 var speed
 var rotation
-export(int) var size = 1
-export(int) var hp   = 10
+export(int) var size   = 1
+export(int) var max_hp = 10
 
 const meteor_count = [ 2, 2, 2, 4 ]
+
+func _init():
+	hp = max_hp
 
 func init(p, s):
 	set_pos(p)
 	speed = s
+	team = 2
 
 func _ready():
 	speed = Vector2()
 	rotation = randf() - 0.5
 	set_fixed_process(true)
 
-func destroy():
+func destroy(o):
 	# Create explosion
 	var explosion_scene = preload("res://scenes/explosion.scn")
 	var explosion = explosion_scene.instance()
@@ -34,25 +38,18 @@ func destroy():
 			meteor.init(get_pos() + direction * 10 * size, speed + (5 + randf() * 5) * direction)
 			angle += 2 * PI / count
 			angle += randf() * 0.3
-			
 	queue_free()
+	if (o != null):
+		o.add_score(100 * (4 - size))
 	
 
 func _fixed_process(delta):
-	var newpos = get_pos() + delta * speed
 	set_rot(get_rot() + rotation * delta)
-	move(delta * speed)
-	if (is_colliding()):
-		hp -= get_collider().damage(hp, 2)
-		if (hp <= 0):
-			destroy()
-	set_pos(newpos)
+	do_move(delta * speed)
 
 func damage(d, t, o = null):
 	if (hp <= d):
-		destroy()
-		if (o != null):
-			print("Drop !")
+		destroy(o)
 		return hp
 	else:
 		hp -= d

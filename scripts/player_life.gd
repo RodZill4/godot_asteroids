@@ -11,4 +11,3 @@ func update_hp(hp, max_hp):
 	set_min(0)
 	set_max(max_hp)
 	set_val(hp)
-
