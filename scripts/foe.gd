@@ -42,10 +42,8 @@ func _fixed_process(delta):
 		# Change behaviour if needed
 		if (state == CHASE):
 			if target_distance < flee_distance:
-				print("fleeing")
 				state = FLEE
 		elif target_distance > chase_distance:
-			print("chasing")
 			state = CHASE
 		# Fix target angle and speed depending on bevaiour
 		if (state == FLEE):

@@ -24,7 +24,6 @@ func _fixed_process(delta):
 		var pos = get_pos()
 		var rot = get_rot()
 		var speed = Vector2(0, 0)
-		
 		# Move
 		if Input.is_action_pressed("ui_left"):
 			speed.x -= 1
@@ -44,7 +43,6 @@ func _fixed_process(delta):
 		if (scalar_speed > max_sideward_speed / abs(projected_speed.x)):
 			scalar_speed = max_sideward_speed / abs(projected_speed.x)
 		do_move(speed.normalized() * scalar_speed * delta)
-		
 		# Turn to aim at the mouse pointer
 		var required_rot = get_global_pos().angle_to_point(Input.get_mouse_pos()) - get_rot()
 		if (required_rot != 0):
@@ -62,7 +60,6 @@ func _fixed_process(delta):
 				elif (required_rot < 0):
 					rot -= delta * max_rot_speed
 		set_rot(rot)
-		
 		# Fire
 		time_since_last_fire += delta
 		if Input.is_action_pressed("player_fire") && time_since_last_fire > reload_time:

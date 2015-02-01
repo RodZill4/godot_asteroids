@@ -20,7 +20,8 @@ func schedule_foe():
 	timer.start()
 	
 func create_foe():
-	if get_child_count() < 100:
+	print(get_child_count())
+	if get_child_count() < 150:
 		var player = get_node("Player")
 		var player_pos = player.get_pos()
 		var foe_choice = randi()%10
