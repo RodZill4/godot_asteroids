@@ -12,8 +12,8 @@ var hp_receiver = null
 var time_since_last_fire = 0
 
 func _ready():
-	team    = 0
-	hp = max_hp
+	team = 0
+	hp   = max_hp
 
 func set_hp_receiver(r):
 	hp_receiver = r

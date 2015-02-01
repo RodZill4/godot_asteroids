@@ -9,10 +9,11 @@ func _ready():
 			weapons.append(i)
 
 func fire():
+	var id = get_instance_ID()
 	for i in weapons:
-		i.fire(get_parent(), team, self)
+		i.fire(get_parent(), team, id)
 
-func damage(d, t, o = null):
+func damage(d, t, o = 0):
 	if (t != team):
 		if (hp <= d):
 			set_hp(0)

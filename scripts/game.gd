@@ -1,9 +1,4 @@
-
-extends EmptyControl
-
-# member variables here, example:
-# var a=2
-# var b="textvar"
+extends Control
 
 func _ready():
 	# Initalization here

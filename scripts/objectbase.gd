@@ -21,3 +21,13 @@ func set_hp(x):
 
 func damage(d, t, o = null):
 	return 0
+	
+func get_node_from_id(id):
+	if (id == 0):
+		return null
+	else:
+		var p = get_parent()
+		for n in p.get_children():
+			if (id == n.get_instance_ID()):
+				return n
+	return null

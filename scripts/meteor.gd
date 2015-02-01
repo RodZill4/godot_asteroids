@@ -7,9 +7,6 @@ export(int) var max_hp = 10
 
 const meteor_count = [ 2, 2, 2, 4 ]
 
-func _init():
-	hp = max_hp
-
 func init(p, s):
 	set_pos(p)
 	speed = s
@@ -19,6 +16,7 @@ func _ready():
 	speed = Vector2()
 	rotation = randf() - 0.5
 	set_fixed_process(true)
+	hp = max_hp
 
 func destroy(o):
 	# Create explosion
@@ -38,10 +36,10 @@ func destroy(o):
 			meteor.init(get_pos() + direction * 10 * size, speed + (5 + randf() * 5) * direction)
 			angle += 2 * PI / count
 			angle += randf() * 0.3
+	var node = get_node_from_id(o)
+	if (node != null):
+		node.add_score(100 * (4 - size))
 	queue_free()
-	if (o != null):
-		o.add_score(100 * (4 - size))
-	
 
 func _fixed_process(delta):
 	set_rot(get_rot() + rotation * delta)
@@ -54,4 +52,3 @@ func damage(d, t, o = null):
 	else:
 		hp -= d
 		return d
-
