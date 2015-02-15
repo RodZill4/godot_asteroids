@@ -4,7 +4,7 @@ extends ProgressBar
 var player
 
 func _ready():
-	player = get_tree().get_root().get_node("Game/Universe/Player")
+	player = get_tree().get_root().get_node("Game/Viewport/Universe/Player")
 	player.set_hp_receiver(self)
 
 func update_hp(hp, max_hp):

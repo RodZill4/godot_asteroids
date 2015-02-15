@@ -17,11 +17,11 @@ func _ready():
 	ScreenResolution = get_node("SettingsMenu/Center/GridContainer/ScreenResolution")
 	TitleMenu.show()
 	SettingsMenu.hide()
+	print(OS.get_fullscreen_mode_list(1))
 	ScreenResolution.clear()
 	ScreenResolution.add_item("1600x1050")
 	ScreenResolution.add_item("1024x768")
 	ScreenResolution.add_item("800x600")
-	print(OS.get_fullscreen_mode_list(0))
 
 
 func _menu_Transition(from, to):

@@ -10,10 +10,14 @@ export(int)   var max_hp             = 100
 var score = 0
 var hp_receiver = null
 var time_since_last_fire = 0
+var camera
+var viewport
 
 func _ready():
 	team = 0
 	hp   = max_hp
+	camera = get_node("Camera")
+	viewport = get_tree().get_root().get_node("Game/Viewport")
 
 func set_hp_receiver(r):
 	hp_receiver = r
@@ -44,7 +48,7 @@ func _fixed_process(delta):
 			scalar_speed = max_sideward_speed / abs(projected_speed.x)
 		do_move(speed.normalized() * scalar_speed * delta)
 		# Turn to aim at the mouse pointer
-		var required_rot = get_global_pos().angle_to_point(Input.get_mouse_pos()) - get_rot()
+		var required_rot = (get_global_pos()-camera.get_camera_pos()+viewport.get_rect().size/2).angle_to_point(Input.get_mouse_pos()) - get_rot()
 		if (required_rot != 0):
 			var required_rot_fix = 0
 			if (required_rot > PI):
